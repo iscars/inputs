@@ -1,0 +1,104 @@
+
+
+.checkbox-group
+  --checkbox-box-color: white
+  --checkbox-mark-color: #1f1f1f
+  --checkbox-checked-color: #04c6ff
+
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 40px
+  height: 40px
+
+  &__input
+    display: none
+
+  &__label
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 1
+    cursor: pointer
+    -webkit-tap-highlight-color: transparent
+
+  &__box
+    position: relative
+    width: 20px
+    height: 20px
+    border: 2px solid var(--checkbox-box-color)
+      radius: 2px
+    box-sizing: border-box
+
+    &:after
+      content: ''
+      position: absolute
+      width: 12px
+      height: 7px
+      border:
+        bottom: 2px solid var(--checkbox-mark-color)
+        left: 2px solid var(--checkbox-mark-color)
+      box-sizing: inherit
+      opacity: 0
+      transform: rotate(-45deg) translate3d(-1px,4px,0)
+
+  &__ripple
+    position: absolute
+    top: -14px
+    right: -14px
+    bottom: -14px
+    left: -14px
+    border-radius: 50%
+    opacity: 0
+    background-color: var(--checkbox-checked-color)
+
+    &_slow
+      transform: scale(0)
+
+  &__input
+    &:checked
+      ~ .checkbox-group
+        &__box
+          border-color: transparent
+          background-color: var(--checkbox-checked-color)
+
+          &:after
+            opacity: 1
+
+        &__ripple
+          &_fast
+            animation: checkbox-ripple-opacity .4s linear 1
+
+          &_slow
+            animation: checkbox-ripple-scale .4s linear 1
+
+
+@keyframes checkbox-ripple-opacity
+  0%
+    opacity: 0
+
+  30%
+    opacity: .12
+
+  70%
+    opacity: .12
+
+  100%
+    opacity: 0
+
+
+@keyframes checkbox-ripple-scale
+  0%
+    opacity: 0
+    transform: scale(.3)
+
+  50%
+    opacity: .12
+    transform: scale(1)
+
+  100%
+    opacity: 0
+    transform: scale(1)

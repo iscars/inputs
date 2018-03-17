@@ -1,0 +1,103 @@
+
+
+.radio-group
+  --radio-circle-color: white
+  --radio-checked-color: #04c6ff
+
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 40px
+  height: 40px
+
+  &__input
+    display: none
+
+  &__label
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 1
+    cursor: pointer
+    -webkit-tap-highlight-color: transparent
+
+  &__circle
+    position: relative
+    width: 22px
+    height: 22px
+    border: 2px solid var(--radio-circle-color)
+      radius: 50%
+    box-sizing: border-box
+
+    &:after
+      content: ''
+      position: absolute
+      top: 4px
+      right: 4px
+      bottom: 4px
+      left: 4px
+      border-radius: 50%
+      background-color: var(--radio-circle-color)
+      transition: transform .2s
+      transform: scale(0)
+
+  &__ripple
+    position: absolute
+    top: -14px
+    right: -14px
+    bottom: -14px
+    left: -14px
+    border-radius: 50%
+    opacity: 0
+    background-color: var(--radio-checked-color)
+
+    &_slow
+      transform: scale(0)
+
+  &__input
+    &:checked
+      ~ .radio-group
+        &__circle
+          border-color: var(--radio-checked-color)
+
+          &:after
+            transform: scale(1)
+            background-color: var(--radio-checked-color)
+
+        &__ripple
+          &_fast
+            animation: checkbox-ripple-opacity .4s linear 1
+
+          &_slow
+            animation: checkbox-ripple-scale .4s linear 1
+
+
+@keyframes checkbox-ripple-opacity
+  0%
+    opacity: 0
+
+  30%
+    opacity: .12
+
+  70%
+    opacity: .12
+
+  100%
+    opacity: 0
+
+
+@keyframes checkbox-ripple-scale
+  0%
+    opacity: 0
+    transform: scale(.3)
+
+  50%
+    opacity: .12
+    transform: scale(1)
+
+  100%
+    opacity: 0
+    transform: scale(1)
